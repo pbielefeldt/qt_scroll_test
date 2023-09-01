@@ -2,6 +2,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QPlainTextEdit>
+#include <QScrollBar>
 
 FileTab::FileTab(QTabWidget &tabWidget, const QString &filename, const QString &tabTitle)
     : QObject(nullptr), tabWidget_(tabWidget), filename_(filename), tabTitle_(tabTitle)
@@ -35,8 +36,7 @@ void FileTab::scrollToBottom()
 {
     QPlainTextEdit *currentTextEdit = qobject_cast<QPlainTextEdit *>(tabWidget_.currentWidget());
     if (currentTextEdit) {
-        QTextCursor cursor = currentTextEdit->textCursor();
-        cursor.movePosition(QTextCursor::End);
-        currentTextEdit->setTextCursor(cursor);
+        QScrollBar *verticalScrollBar = currentTextEdit->verticalScrollBar();
+        verticalScrollBar->setValue(verticalScrollBar->maximum());
     }
 }
