@@ -12,14 +12,18 @@ project(TextFileViewer)
 # (make sure you have a GUI)
 #######################################################
 
-# Find the Qt5 package
-find_package(Qt5Widgets REQUIRED)
+# Find Qt5 package
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
+set(CMAKE_AUTOMOC ON)
 
-# Set your source file(s)
-set(SOURCES main.cpp)
+# Add your source files
+set(SOURCES
+    main.cpp
+    FileTab.cpp   # Add FileTab.cpp to the source files
+)
 
 # Create the executable
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-# Link against Qt5 libraries
+# Link the Qt5 Widgets library
 target_link_libraries(${PROJECT_NAME} Qt5::Widgets)
