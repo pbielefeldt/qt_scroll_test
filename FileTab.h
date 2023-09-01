@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QTabWidget>
+#include <QFileSystemWatcher>
 
 class FileTab : public QObject
 {
@@ -15,8 +16,10 @@ private:
     QTabWidget &tabWidget_;
     QString filename_;
     QString tabTitle_;
+    QFileSystemWatcher fileWatcher;
 
     void readFileAndDisplay();
+    void refreshFileContent();
 
 public slots:
     void scrollToBottom();
