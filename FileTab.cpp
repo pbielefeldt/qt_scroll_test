@@ -1,5 +1,6 @@
 #include "FileTab.h"
 #include <QFile>
+#include <QDebug>
 #include <QTextStream>
 #include <QMessageBox>
 #include <QPlainTextEdit>
@@ -41,6 +42,7 @@ void FileTab::readFileAndDisplay()
 
 void FileTab::refreshFileContent()
 {
+    qDebug() << Q_FUNC_INFO << "refreshing";
     QFile file(filename_);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream in(&file);
@@ -51,6 +53,7 @@ void FileTab::refreshFileContent()
             QPlainTextEdit *textEdit = qobject_cast<QPlainTextEdit *>(tabWidget_.widget(i));
             if (textEdit && tabWidget_.tabText(i) == tabTitle_) {
                 textEdit->setPlainText(fileContents);
+                scrollToBottom();
                 break;
             }
         }
@@ -63,6 +66,7 @@ void FileTab::refreshFileContent()
 
 void FileTab::scrollToBottom()
 {
+    qDebug() << Q_FUNC_INFO << "scrolling";
     QPlainTextEdit *currentTextEdit = qobject_cast<QPlainTextEdit *>(tabWidget_.currentWidget());
     if (currentTextEdit) {
         QScrollBar *verticalScrollBar = currentTextEdit->verticalScrollBar();
