@@ -1,7 +1,7 @@
 #include <QApplication>
 #include <QFile>
 #include <QTextStream>
-#include <QLabel>
+#include <QPlainTextEdit>
 #include <QWidget>
 
 int main(int argc, char *argv[])
@@ -13,23 +13,26 @@ int main(int argc, char *argv[])
     window.setWindowTitle("Text File Viewer");
     window.setGeometry(100, 100, 400, 300);
 
-    // Create a QLabel to display the file contents
-    QLabel label(&window);
-    label.setGeometry(10, 10, 380, 280);
+    // Create a QPlainTextEdit to display the file contents
+    QPlainTextEdit textEdit(&window);
+    textEdit.setGeometry(10, 10, 380, 280);
 
     // Read the contents of the text file
-    QFile file("../test_1.txt");
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    QFile file("../test_1.txt"); // Adjust the file path as needed
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
         QTextStream in(&file);
         QString fileContents = in.readAll();
 
-        // Display the file contents in the QLabel
-        label.setText(fileContents);
+        // Set the file contents in the QPlainTextEdit
+        textEdit.setPlainText(fileContents);
 
         file.close();
-    } else {
+    }
+    else
+    {
         // Display an error message if the file couldn't be opened
-        label.setText("Error: Could not open the file.");
+        textEdit.setPlainText("Error: Could not open the file.");
     }
 
     // Show the window
