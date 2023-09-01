@@ -1,6 +1,17 @@
 cmake_minimum_required(VERSION 3.5)
 project(TextFileViewer)
 
+#######################################################
+# To build, create a directory and use CMake and make.
+# You must have the required Qt libs installed.
+#     mkdir build; cd build
+#     cmake ..
+#     make
+# To run, execute
+#     ./TextFileViewer
+# (make sure you have a GUI)
+#######################################################
+
 # Find the Qt5 package
 find_package(Qt5Widgets REQUIRED)
 
